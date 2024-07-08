@@ -96,4 +96,61 @@ Quick-find is too slow. Union is too expensive. It takes N 2 array accesses to p
 N union commands on N objects.
 
 Quadratic algorithms don't scale with technology. New computer may be 10x as fast. But, has 10x as much memory ⇒
-want to solve a problem that is 10x as big. With quadratic algorithm, takes 10x as long!
+want to solve a problem that is 10x as big. git With quadratic algorithm, takes 10x as long!
+
+### Quick Union
+
+Data structure.
+
+・Integer array id[] of length N.
+
+・Interpretation: id[i] is parent of i.
+
+・Root of i is id[id[id[...id[i]...]]].
+
+Find: Check if p and q have the same root.
+
+Union: To merge components containing p and q,
+set the id of p's root to the id of q's root.
+
+```
+public class QuickUnionUF{
+    private int id[];
+    public QuickUnionUF(int N){
+        id = new int[N];
+        for(int i=0; i<N; i++){
+            id[i]=i;                // set id of each object to itself
+        }
+    }
+    private int root(int N){
+        while(i != id[i]) i = id[i] ;  // finding the root of the object
+        return i;
+    }
+    public boolean connected(int p, int q){
+        return root(p) == root(q); // to check if p and q have same root
+    }
+    public union(int p, int q){
+        int i = root(p);
+        int j = root(q);
+        id[i] = j;      // changing root of p to root of q
+    }
+}
+```
+
+Quick-union is also too slow
+
+quick-find: initialize - N, Union - N, find - 1
+
+quick-union: initialize - N, Union - N~, find - N // ~ includes cost of finding roots
+
+##### Quick-find defect:
+
+・Union too expensive (N array accesses).
+
+・Trees are flat, but too expensive to keep them flat.
+
+##### Quick-union defect:
+
+・Trees can get tall.
+
+・Find too expensive (could be N array accesses).
