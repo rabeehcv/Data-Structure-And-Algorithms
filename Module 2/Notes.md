@@ -154,3 +154,59 @@ quick-union: initialize - N, Union - N~, find - N // ~ includes cost of finding 
 ・Trees can get tall.
 
 ・Find too expensive (could be N array accesses).
+
+### Quick Union Improvement
+
+#### Weighted Quick Union - improvement 1
+
+- Modify quick-union to avoid tall trees.
+- Keep track of size of each tree (number of objects).
+- Balance by linking root of smaller tree to root of larger tree.
+
+Data structure is same as quick-union, but maintain extra array sz[i]
+to count number of objects in the tree rooted at i.
+
+Find: Identical to quick-union.
+
+```
+return root(p) == root(q);
+```
+
+Union: Modify quick-union to:
+
+- Link root of smaller tree to root of larger tree.
+- Update the sz[] array.
+
+```
+int i = root(p);
+int j = root(q);
+if (i==j) return;
+if (sz[i] < sz[j]) {id[i] = j; sz[j] += sz[i]; }
+else               {id[j] = i; sz[i] += sz[j]; }
+```
+
+Proposition: Depth of any node x is at most lg N.
+
+weighted QU: Initialise - N, Union - lg N †, Connected - lg N
+// † includes cost of finding roots
+
+#### Quick union with path compression - improvement 2
+
+Just after computing the root of p,
+set the id of each examined node to point to that root.
+
+Two-pass implementation: add second loop to root() to set the id[]
+of each examined node to the root.
+
+Simpler one-pass variant: Make every other node in path point to its
+grandparent (thereby halving path length)
+
+```
+private int root(int i){
+    while(i != id[i]){
+        id[i] = id[id[i]];
+        i = id[i];
+    }
+    return i;
+}
+```
