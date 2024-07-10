@@ -210,3 +210,23 @@ private int root(int i){
     return i;
 }
 ```
+
+### Union-find applications : Percolation
+
+A model for many physical systems:
+
+- N-by-N grid of sites.
+- Each site is open with probability p (or blocked with probability 1 – p).
+- System percolates iff top and bottom are connected by open sites.
+
+Eg : Electricity, fluid flow, social network, etc
+
+#### To check whether an N-by-N system percolates?
+
+- Create an object for each site and name them 0 to N 2 – 1.
+- Sites are in same component if connected by open sites.
+- Percolates iff any site on bottom row is connected to site on top row.
+
+Q. How to model opening a new site?
+
+A. Mark new site as open; connect it to all of its adjacent open sites.
