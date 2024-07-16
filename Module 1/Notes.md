@@ -4,7 +4,9 @@ Data Structure - Method to store the information.
 
 ### Java Class
 
-In Java, a class is a template that defines the structure and behavior (data and methods) of objects. A class encapsulates data for the object and methods to manipulate that data.
+In Java, a class is a template that defines the structure and behavior (data and methods) of objects. A class encapsulates data for the object and methods to manipulate that data. A class is defined only once and serves as a reference for creating multiple objects.
+
+An object is an instance of a class. We can create many objects from a single class.
 
 #### Structure of a Java Class
 
