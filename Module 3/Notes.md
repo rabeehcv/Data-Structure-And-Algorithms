@@ -152,3 +152,39 @@ public class Stack<Item>{
     }
 }
 ```
+
+#### Arithmetic expression evaluation
+
+```
+public class Calculation{
+    public static main void(String[] args){
+        Stack<String> ops = new Stack<String>();
+        Stack<Double> val = new Stack<Double>();
+        while(!StdIn.isEmpty()){
+            String s = StdIn.readString();
+            if(s.equals("(")) ;
+            else if(s.equals("+")) ops.push(s);
+            else if(s.equals("*")) ops.push(s);
+            else if(s.equals("-")) ops.push(s);
+            else if(s.equals("/")) ops.push(s);
+            else if(s.equals(")")) {
+                String op = ops.pop();
+                if(op.equals("+")) vals.push(vals.pop() + vals.pop());
+                else if(op.equals("-")) {
+                    lastValue = vals.pop();
+                    firstValue = vals.pop();
+                    vals.push(firstValue - lastValue);}
+                else if(op.equals("*"))   vals.push(vals.pop() * vals.pop());
+                else if(op.equals("/")){
+                    lastValue = vals.pop();
+                    firstValue = vals.pop();
+                    vals.push(firstValue / lastValue);}
+            }
+            else{
+                vals.push(Double.parseDoule(s));
+            }
+        }
+        StdOut.println(vals.pop());
+    }
+}
+```
